@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  apache:
+    image: webdevops/php-apache-dev:7.4
+    ports:
+      - 80:80
+    volumes:
+      - .:/app
+    environment:
+      - WEB_DOCUMENT_ROOT=/app/public
+  mariadb:
+    image: mariadb
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=phpmvcframework
+    volumes:
+      - ./runtime/docker/mariadb_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8090:80"
+    environment:
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    links:
+      - mariadb:db
