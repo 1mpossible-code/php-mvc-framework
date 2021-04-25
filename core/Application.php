@@ -11,6 +11,10 @@ namespace app\core;
 class Application
 {
     /**
+     * @var string
+     */
+    public static string $ROOT_DIR;
+    /**
      * @var Router
      */
     public Router $router;
@@ -19,12 +23,28 @@ class Application
      */
     public Request $request;
     /**
+     * @var Response
+     */
+    public Response $response;
+    /**
+     * Static property that is this class
+     * @var Application
+     */
+    public static Application $app;
+
+    /**
      * Application constructor.
      */
-    public function __construct()
+    public function __construct(string $rootPath)
     {
+        // Root path defining
+        self::$ROOT_DIR = $rootPath;
+        // Define this as a static property
+        self::$app = $this;
+        // Create instances
         $this->request = new Request();
-        $this->router = new Router($this->request);
+        $this->response = new Response();
+        $this->router = new Router($this->request, $this->response);
     }
 
     /**
@@ -33,6 +53,6 @@ class Application
     public function run()
     {
         // Router start resolving
-        $this->router->resolve();
+        echo $this->router->resolve();
     }
 }
