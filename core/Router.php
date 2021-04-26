@@ -26,6 +26,7 @@ class Router
     /**
      * Router constructor.
      * @param Request $request
+     * @param Response $response
      */
     public function __construct(Request $request, Response $response)
     {
@@ -40,7 +41,7 @@ class Router
      * @param $path
      * @param $callback
      */
-    public function get($path, $callback)
+    public function get($path, $callback): void
     {
         // Add specified callback with specified path
         // to associative array into 'get' routes list
@@ -52,7 +53,7 @@ class Router
      * @param $path
      * @param $callback
      */
-    public function post($path, $callback)
+    public function post($path, $callback): void
     {
         // Add specified callback with specified path
         // to associative array into 'post' routes list
@@ -79,20 +80,28 @@ class Router
         if (is_string($callback)) {
             return $this->renderView($callback);
         }
+        // Check if the callback is array; if true replace
+        // the link to the controller by its instance in
+        // callback array
+        if (is_array($callback)) {
+            $callback[0] = new $callback[0]();
+        }
         // Return the result of callback
         return $callback();
     }
 
     /**
-     * Render specified view with layout
+     * Render specified view with layout, introduce parameters
      * @param string $view
+     * @param array $params
+     * @return array|false|string|string[]
      */
-    public function renderView(string $view)
+    public function renderView(string $view, array $params = [])
     {
         // Get layout content
         $layoutContent = $this->layoutContent();
         // Get view content
-        $viewContent = $this->renderOnlyView($view);
+        $viewContent = $this->renderOnlyView($view, $params);
         // Replace the slot in layout by view content, then return
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
@@ -109,17 +118,32 @@ class Router
     }
 
     /**
-     * Return the specified view as a string
+     * Return the specified view as a string,
+     * create new variables from array $params
      * @param string $view
+     * @param array $params
      * @return false|string
      */
-    protected function renderOnlyView(string $view)
+    protected function renderOnlyView(string $view, array $params)
     {
+        // For each element in array $params create a
+        // variable with the name as a key of array and
+        // value as a value
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+        // Start buffering, render the view with the
+        // specified name, then return buffer
         ob_start();
         include_once Application::$ROOT_DIR."/views/$view.php";
         return ob_get_clean();
     }
 
+    /**
+     * Connect the view with the layout
+     * @param string $viewContent
+     * @return array|false|string|string[]
+     */
     protected function renderContent(string $viewContent)
     {
         // Get layout content
