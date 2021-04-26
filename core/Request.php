@@ -33,9 +33,32 @@ class Request
      * Return method of the request
      * @return string
      */
-    public function getMethod()
+    public function getMethod(): string
     {
         // Return requested method in lower case
         return strtolower( $_SERVER['REQUEST_METHOD'] );
+    }
+
+    /**
+     * Get clear data from 'get' or 'post' request
+     * @return array
+     */
+    public function getBody(): array
+    {
+        $body = [];
+        // Sanitize 'get' data and save each key to $body variable
+        if ($this->getMethod() === 'get') {
+            foreach ($_GET as $key => $value) {
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        // Sanitize 'post' data and save each key to $body variable
+        if ($this->getMethod() === 'post') {
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        // Return sanitized data
+        return $body;
     }
 }
