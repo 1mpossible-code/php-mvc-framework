@@ -27,6 +27,10 @@ class Application
      */
     public Response $response;
     /**
+     * @var Controller
+     */
+    public Controller $controller;
+    /**
      * Static property that is this class
      * @var Application
      */
@@ -50,7 +54,7 @@ class Application
     /**
      * Main function of application that starts it
      */
-    public function run()
+    public function run(): void
     {
         // Router start resolving
         echo $this->router->resolve();

@@ -11,6 +11,11 @@ namespace app\core;
 class Controller
 {
     /**
+     * Layout variable
+     * @var string
+     */
+    public string $layout = 'main';
+    /**
      * Render specified view with specified params if available
      * @param string $view
      * @param array $params
@@ -19,6 +24,15 @@ class Controller
     public function render(string $view, array $params = [])
     {
         return Application::$app->router->renderView($view, $params);
+    }
+
+    /**
+     * Changes the current layout to specified
+     * @param string $layout
+     */
+    public function setLayout(string $layout)
+    {
+        $this->layout = $layout;
     }
 
 }

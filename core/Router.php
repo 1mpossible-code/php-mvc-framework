@@ -68,7 +68,7 @@ class Router
         // Get requested path
         $path = $this->request->getPath();
         // Get requested method
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         // Get callback from routes with the specified method and path
         $callback = $this->routes[$method][$path] ?? false;
         // If callback is not defined return 'Not found'
@@ -82,12 +82,15 @@ class Router
         }
         // Check if the callback is array; if true replace
         // the link to the controller by its instance in
-        // callback array
+        // callback array and set Application controller param
         if (is_array($callback)) {
-            $callback[0] = new $callback[0]();
+            // Set applications controller parameter
+            Application::$app->controller = new $callback[0]();
+            // Replace link by its instance
+            $callback[0] = Application::$app->controller;
         }
         // Return the result of callback
-        return $callback();
+        return $callback($this->request);
     }
 
     /**
@@ -107,13 +110,17 @@ class Router
     }
 
     /**
-     * Return the layout main.php as a string
+     * Write the controller's layout to buffer;
+     * return the buffer
      * @return false|string
      */
     protected function layoutContent()
     {
+        // Get layout from Application controller parameter
+        $layout = Application::$app->controller->layout;
+        // Start writing into buffer
         ob_start();
-        include_once Application::$ROOT_DIR."/views/layouts/main.php";
+        include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
         return ob_get_clean();
     }
 

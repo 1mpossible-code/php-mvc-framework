@@ -33,7 +33,7 @@ class Request
      * Return method of the request
      * @return string
      */
-    public function getMethod(): string
+    public function method(): string
     {
         // Return requested method in lower case
         return strtolower( $_SERVER['REQUEST_METHOD'] );
@@ -47,13 +47,13 @@ class Request
     {
         $body = [];
         // Sanitize 'get' data and save each key to $body variable
-        if ($this->getMethod() === 'get') {
+        if ($this->method() === 'get') {
             foreach ($_GET as $key => $value) {
                 $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         // Sanitize 'post' data and save each key to $body variable
-        if ($this->getMethod() === 'post') {
+        if ($this->method() === 'post') {
             foreach ($_POST as $key => $value) {
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
