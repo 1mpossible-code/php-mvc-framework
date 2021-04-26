@@ -4,32 +4,32 @@
 namespace app\controllers;
 
 
-use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 
 /**
- * Class ContactController
+ * Class RegisterController
  * @package app\controllers
  */
-class ContactController extends Controller
+class RegisterController extends Controller
 {
     /**
-     * Show contact page
+     * Show register page
      * @return array|false|string|string[]
      */
     public function index()
     {
-        return $this->render('contact');
+        $this->setLayout('auth');
+        return $this->render('auth/register');
     }
 
     /**
-     * Handle the data from contact's page request
+     * Register new user
+     * @param Request $request
      * @return string
      */
     public function store(Request $request)
     {
-        return 'handling submitted data';
+        return 'handle submitted data';
     }
-
 }
