@@ -35,11 +35,15 @@ class Application
      * @var Application
      */
     public static Application $app;
+    /**
+     * @var Database
+     */
+    public Database $db;
 
     /**
      * Application constructor.
      */
-    public function __construct(string $rootPath)
+    public function __construct(string $rootPath, array $config)
     {
         // Root path defining
         self::$ROOT_DIR = $rootPath;
@@ -49,6 +53,9 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
+
+        // Create database connection
+        $this->db = new Database($config['db']);
     }
 
     /**
