@@ -6,11 +6,15 @@ use app\controllers\LoginController;
 use app\controllers\RegisterController;
 use app\core\Application;
 
+// Composer autoload
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+// Load .env file from root directory
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
+// Create config with information
+// from .env
 $config = [
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
