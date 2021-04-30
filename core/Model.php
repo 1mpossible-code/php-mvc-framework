@@ -43,6 +43,19 @@ abstract class Model
      * define the element it must matches with
      */
     public const RULE_MATCH = 'match';
+    /**
+     * If data must be unique for
+     * specified database model class
+     *
+     * Must be used in array with
+     * the second named element 'class' to
+     * define the class in what
+     * data must be unique
+     *
+     * May contain the third named element 'attribute'
+     * if must be unique with another attribute
+     */
+    public const RULE_UNIQUE = 'unique';
 
     /**
      * Fulfilled each parameter of Model with
@@ -100,11 +113,40 @@ abstract class Model
                     $this->addErrorForRule($attribute, self::RULE_MAX, $rule);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
+                    // Get label of field that must be the same with current
                     $rule['match'] = $this->getLabel($rule['match']);
                     $this->addErrorForRule($attribute, self::RULE_MATCH, $rule);
                 }
+                if ($ruleName === self::RULE_UNIQUE) {
+                    // Get classname of given rule
+                    $className = $rule['class'];
+                    // Get attribute that is specified in rule
+                    $uniqueAttribute = $rule['attribute'] ?? $attribute;
+                    // Get table name of given class
+                    $tableName = $className::tableName();
+                    // Prepare statement in what select all records
+                    // with same values of specified attributes
+                    $statement = Application::$app->db->prepare(
+                        "SELECT * FROM $tableName WHERE $uniqueAttribute = :attr"
+                    );
+                    // Bind value to statement
+                    $statement->bindValue(":attr", $value);
+                    // Execute statement
+                    $statement->execute();
+                    // Get record if exists
+                    $record = $statement->fetchObject();
+                    // If has record add error
+                    if ($record) {
+                        // Add error where field is attribute's label
+                        $this->addErrorForRule($attribute, self::RULE_UNIQUE, [
+                            'field' => $this->getLabel($attribute)
+                        ]);
+                    }
+                }
             }
         }
+        // Return true if no errors in errors array
+        // else return false
         return empty($this->errors);
     }
 
@@ -181,6 +223,7 @@ abstract class Model
             self::RULE_MIN => 'Min length of this must be {min}',
             self::RULE_MAX => 'Max length of this must be {max}',
             self::RULE_MATCH => 'This field must be same as {match}',
+            self::RULE_UNIQUE => 'Record with this {field} already exists',
         ];
     }
 
