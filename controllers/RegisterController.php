@@ -4,10 +4,12 @@
 namespace app\controllers;
 
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
 use app\models\User;
+use function Couchbase\defaultDecoder;
 
 /**
  * Class RegisterController
@@ -31,7 +33,7 @@ class RegisterController extends Controller
     /**
      * Register new user
      * @param Request $request
-     * @return string
+     * @return array|false|string|string[]
      */
     public function store(Request $request)
     {
@@ -39,11 +41,15 @@ class RegisterController extends Controller
         $user = new User();
         // Fulfill the model with the data from request
         $user->loadData($request->getBody());
-        // Return success if the validation is passed and new user is created
+        // Set success flash message if the validation is passed and new user is created
         if ($user->validate() && $user->save()) {
-            return "Success";
+            // Set success flash message
+            Application::$app->session->setFlash('success', 'User created successfully!');
+            // Redirect to homepage
+            Application::$app->response->redirect('/');
+            exit;
         }
-        // TODO: Implement response redirecting
+        // Render register page
         $this->setLayout('auth');
         return $this->render('auth/register', [
             'model' => $user,
