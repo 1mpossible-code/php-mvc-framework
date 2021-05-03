@@ -76,6 +76,16 @@ class User extends DbModel
     }
 
     /**
+     * User's primary key
+     * @return string
+     */
+    public function primaryKey(): string
+    {
+        // Primary key
+        return 'id';
+    }
+
+    /**
      * @inheritDoc
      * @return string[]
      */
