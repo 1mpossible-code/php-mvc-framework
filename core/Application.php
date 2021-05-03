@@ -15,6 +15,10 @@ class Application
      */
     public static string $ROOT_DIR;
     /**
+     * @var string
+     */
+    public string $userClass;
+    /**
      * @var Router
      */
     public Router $router;
@@ -45,10 +49,17 @@ class Application
     public Database $db;
 
     /**
+     * @var DbModel|null
+     */
+    public ?DbModel $user;
+
+    /**
      * Application constructor.
      */
     public function __construct(string $rootPath, array $config)
     {
+        // Get user class string from config
+        $this->userClass = $config['userClass'];
         // Root path defining
         self::$ROOT_DIR = $rootPath;
         // Define this as a static property
@@ -61,6 +72,8 @@ class Application
 
         // Create database connection
         $this->db = new Database($config['db']);
+        // Set user
+        $this->user = $this->getUser();
     }
 
     /**
@@ -70,5 +83,57 @@ class Application
     {
         // Router start resolving
         echo $this->router->resolve();
+    }
+
+    /**
+     * Login user into application,
+     * save it to session
+     * @param DbModel $user
+     * @return bool
+     */
+    public function login(DbModel $user): bool
+    {
+        // Save user to application
+        $this->user = $user;
+        // Get user's primary key
+        $primaryKey = $user->primaryKey();
+        // Get user's value of primary key
+        $primaryValue = $user->{$primaryKey};
+        // Set session's user value as a primary value
+        $this->session->set('user', $primaryValue);
+        // If no error return true
+        return true;
+    }
+
+    /**
+     * Logout user and
+     * remove him form session
+     */
+    public function logout(): void
+    {
+        // Set user application
+        // value to null
+        $this->user = null;
+        // Remove user value from session
+        $this->session->remove('user');
+    }
+
+    /**
+     * Get application
+     * user from session
+     */
+    public function getUser()
+    {
+        // Get user's primary key
+        $primaryValue = $this->session->get('user');
+        // Set user is primary value is exists
+        if ($primaryValue) {
+            // Get user's value of primary key
+            $primaryKey = $this->userClass::primaryKey();
+            // Get user with primary key and value, then return
+            return $this->userClass::findOne([$primaryKey => $primaryValue]);
+        }
+        // If no primary value return null
+        return null;
     }
 }
