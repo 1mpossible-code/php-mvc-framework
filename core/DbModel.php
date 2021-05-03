@@ -54,6 +54,32 @@ abstract class DbModel extends Model
     }
 
     /**
+     * Find and return object with
+     * specified 'where' data
+     * @param array $where
+     * @return mixed
+     */
+    public static function findOne(array $where)
+    {
+        // Get table name
+        $tableName = static::tableName();
+        // Get attributes
+        $attributes = array_keys($where);
+        // Make sql statement to select 'where' attributes and then bind them
+        $sql = implode('AND', array_map(fn ($attr) => "$attr = :$attr", $attributes));
+        // Prepare sql statement ot find something
+        $statement = self::prepare("SELECT * FROM $tableName WHERE $sql");
+        // Bind 'where' attributes with their values
+        foreach ($where as $key => $item) {
+            $statement->bindValue(":$key", $item);
+        }
+        // Execute statement
+        $statement->execute();
+        // Return the result of executing
+        return $statement->fetchObject(static::class);
+    }
+
+    /**
      * Helping method that prepares
      * PDO SQL statements
      * @param $SQL
