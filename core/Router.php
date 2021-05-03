@@ -90,7 +90,7 @@ class Router
             $callback[0] = Application::$app->controller;
         }
         // Return the result of callback
-        return $callback($this->request);
+        return $callback($this->request, $this->response);
     }
 
     /**

@@ -6,6 +6,8 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\core\Request;
+use app\core\Response;
+use app\models\LoginForm;
 
 /**
  * Class LoginController
@@ -19,17 +21,40 @@ class LoginController extends Controller
      */
     public function index()
     {
+        // Make new login form
+        $loginForm = new LoginForm();
+        // Set auth layout
         $this->setLayout('auth');
-        return $this->render('auth/login');
+        // Render login page with LoginForm model
+        return $this->render('auth/login', [
+            'model' => $loginForm,
+        ]);
     }
 
     /**
      * Login if request data is valid
      * @param Request $request
-     * @return string
+     * @param Response $response
+     * @return array|false|string|string[]
      */
-    public function store(Request $request)
+    public function store(Request $request, Response $response)
     {
-        return 'handle submitted data';
+        // Make new login form
+        $loginForm = new LoginForm();
+        // Load data to login form model
+        $loginForm->loadData($request->getBody());
+        // If login form data is valid and user
+        // logined successfully redirect to homepage
+        if ($loginForm->validate() && $loginForm->login()) {
+            // Redirect to homepage
+            $response->redirect('/');
+            exit;
+        }
+        // Set auth layout
+        $this->setLayout('auth');
+        // Render login page with LoginForm model
+        return $this->render('auth/login', [
+            'model' => $loginForm,
+        ]);
     }
 }
