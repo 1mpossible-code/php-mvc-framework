@@ -26,6 +26,12 @@ abstract class DbModel extends Model
     abstract public function attributes(): array;
 
     /**
+     * Primary key of the model
+     * @return string
+     */
+    abstract public function primaryKey(): string;
+
+    /**
      * Save the model data to database
      * @return bool
      */
