@@ -1,12 +1,13 @@
 <?php
 /** @var $model User */
+
 use app\core\form\elements\InputEmail;
 use app\core\form\elements\InputPassword;
 use app\core\form\elements\InputText;
 use app\core\form\Form;
 use app\models\User; ?>
 
-<h1>Register</h1>
+    <h1>Register</h1>
 <?php $form = new Form('', 'POST'); ?>
 
 <?php $form->field(InputText::class, $model, 'name'); ?>
