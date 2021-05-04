@@ -136,4 +136,13 @@ class Application
         // If no primary value return null
         return null;
     }
+
+    /**
+     * If current user is guest
+     * @return bool
+     */
+    public static function isGuest(): bool
+    {
+        return !self::$app->user;
+    }
 }

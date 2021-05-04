@@ -33,7 +33,7 @@ use app\core\Application;
 
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-
+                <?php if (Application::isGuest()): ?>
                 <li class="nav-item">
                     <a class="nav-link active" href="/login">Login</a>
                 </li>
@@ -41,7 +41,11 @@ use app\core\Application;
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
-
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><?php echo Application::$app->user->name; ?> (Logout)</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
