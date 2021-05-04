@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
 use app\core\Response;
@@ -56,5 +57,18 @@ class LoginController extends Controller
         return $this->render('auth/login', [
             'model' => $loginForm,
         ]);
+    }
+
+    /**
+     * Logout user
+     */
+    public function destroy(Request $request, Response $response)
+    {
+        // Logout user
+        Application::$app->logout();
+        // Redirect guest to homepage
+        $response->redirect('/');
+        // Stop application
+        exit;
     }
 }

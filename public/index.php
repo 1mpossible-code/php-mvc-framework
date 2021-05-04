@@ -39,6 +39,7 @@ $app->router->post('/contact', [ContactController::class, 'store']);
 // Login
 $app->router->get('/login', [LoginController::class, 'index']);
 $app->router->post('/login', [LoginController::class, 'store']);
+$app->router->get('/logout', [LoginController::class, 'destroy']);
 
 // Register
 $app->router->get('/register', [RegisterController::class, 'index']);
