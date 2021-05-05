@@ -43,6 +43,10 @@ use app\core\Application;
                 </li>
                 <?php else: ?>
                     <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout"><?php echo Application::$app->user->name; ?> (Logout)</a>
                     </li>
                 <?php endif; ?>
