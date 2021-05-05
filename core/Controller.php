@@ -4,6 +4,8 @@
 namespace app\core;
 
 
+use app\core\middlewares\Middleware;
+
 /**
  * Base Controller Class
  * @package app\core
@@ -15,6 +17,17 @@ class Controller
      * @var string
      */
     public string $layout = 'main';
+    /**
+     * Array that contains middlewares
+     * @var Middleware[]
+     */
+    protected array $middlewares = [];
+    /**
+     * Current action
+     * @var string
+     */
+    public string $action = '';
+
     /**
      * Render specified view with specified params if available
      * @param string $view
@@ -30,9 +43,27 @@ class Controller
      * Changes the current layout to specified
      * @param string $layout
      */
-    public function setLayout(string $layout)
+    public function setLayout(string $layout): void
     {
         $this->layout = $layout;
     }
 
+    /**
+     * Register new middleware
+     * @param Middleware $middleware
+     */
+    public function registerMiddleware(Middleware $middleware): void
+    {
+        // Add middleware to middlewares array
+        $this->middlewares[] = $middleware;
+    }
+
+    /**
+     * Get middlewares
+     * @return Middleware[]
+     */
+    public function getMiddlewares(): array
+    {
+        return $this->middlewares;
+    }
 }

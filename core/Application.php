@@ -4,6 +4,8 @@
 namespace app\core;
 
 
+use Exception;
+
 /**
  * Main class of application
  * @package app
@@ -89,8 +91,18 @@ class Application
      */
     public function run(): void
     {
-        // Router start resolving
-        echo $this->router->resolve();
+        // If have exceptions handle them
+        try {
+            // Router start resolving
+            echo $this->router->resolve();
+        } catch (Exception $exception) {
+            // Set exception status code
+            $this->response->setStatusCode($exception->getCode());
+            // Render _error view with exception
+            echo $this->router->renderView('_error', [
+                'exception' => $exception,
+            ]);
+        }
     }
 
     /**
