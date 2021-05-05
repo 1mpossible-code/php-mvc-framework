@@ -3,6 +3,7 @@
 use app\controllers\ContactController;
 use app\controllers\HomeController;
 use app\controllers\LoginController;
+use app\controllers\ProfileController;
 use app\controllers\RegisterController;
 use app\core\Application;
 use app\models\User;
@@ -44,6 +45,9 @@ $app->router->get('/logout', [LoginController::class, 'destroy']);
 // Register
 $app->router->get('/register', [RegisterController::class, 'index']);
 $app->router->post('/register', [RegisterController::class, 'store']);
+
+// Profile
+$app->router->get('/profile', [ProfileController::class, 'index']);
 
 // Run application
 $app->run();
