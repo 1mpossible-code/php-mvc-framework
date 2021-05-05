@@ -116,8 +116,7 @@ class Router
      */
     protected function layoutContent()
     {
-        // Get layout from Application controller parameter
-        $layout = Application::$app->controller->layout;
+        $layout = Application::$app->controller->layout ?? Application::$app->layout;
         // Start writing into buffer
         ob_start();
         include_once Application::$ROOT_DIR."/views/layouts/$layout.php";

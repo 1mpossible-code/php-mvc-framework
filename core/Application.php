@@ -39,6 +39,11 @@ class Application
      */
     public Controller $controller;
     /**
+     * Default layout
+     * @var string
+     */
+    public string $layout;
+    /**
      * Static property that is this class
      * @var Application
      */
@@ -60,6 +65,9 @@ class Application
     {
         // Get user class string from config
         $this->userClass = $config['userClass'];
+        // Get layout from config or 'main'
+        // as default value
+        $this->layout = $config['layout'] ?? 'main';
         // Root path defining
         self::$ROOT_DIR = $rootPath;
         // Define this as a static property
