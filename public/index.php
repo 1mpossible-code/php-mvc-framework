@@ -5,7 +5,7 @@ use app\controllers\HomeController;
 use app\controllers\LoginController;
 use app\controllers\ProfileController;
 use app\controllers\RegisterController;
-use app\core\Application;
+use impossible\phpmvc\Application;
 use app\models\User;
 
 // Composer autoload

@@ -4,11 +4,11 @@
  * @var $this View
  */
 
-use app\core\form\elements\InputEmail;
-use app\core\form\elements\InputPassword;
-use app\core\form\elements\InputText;
-use app\core\form\Form;
-use app\core\View;
+use impossible\phpmvc\form\elements\InputEmail;
+use impossible\phpmvc\form\elements\InputPassword;
+use impossible\phpmvc\form\elements\InputText;
+use impossible\phpmvc\form\Form;
+use impossible\phpmvc\View;
 use app\models\User;
 
 $this->title = 'Register';

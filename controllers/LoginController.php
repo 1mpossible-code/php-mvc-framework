@@ -4,10 +4,10 @@
 namespace app\controllers;
 
 
-use app\core\Application;
-use app\core\Controller;
-use app\core\Request;
-use app\core\Response;
+use impossible\phpmvc\Application;
+use impossible\phpmvc\Controller;
+use impossible\phpmvc\Request;
+use impossible\phpmvc\Response;
 use app\models\LoginForm;
 
 /**

@@ -4,7 +4,7 @@
  * @var $this View
  */
 
-use app\core\View;
+use impossible\phpmvc\View;
 
 $this->title = $exception->getMessage();
 ?>

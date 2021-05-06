@@ -4,7 +4,7 @@
 namespace app\controllers;
 
 
-use app\core\Controller;
+use impossible\phpmvc\Controller;
 
 /**
  * Class HomeController

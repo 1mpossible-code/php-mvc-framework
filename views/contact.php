@@ -4,11 +4,11 @@
  * @var ContactForm $model
  */
 
-use app\core\form\elements\InputEmail;
-use app\core\form\elements\InputText;
-use app\core\form\elements\Textarea;
-use app\core\form\Form;
-use app\core\View;
+use impossible\phpmvc\form\elements\InputEmail;
+use impossible\phpmvc\form\elements\InputText;
+use impossible\phpmvc\form\elements\Textarea;
+use impossible\phpmvc\form\Form;
+use impossible\phpmvc\View;
 use app\models\ContactForm;
 
 $this->title = 'Contact';

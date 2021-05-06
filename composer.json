@@ -13,7 +13,12 @@
     },
     "require": {
         "vlucas/phpdotenv": "^5.3",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "impossible/php-mvc-core": "^1.0"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
     },
     "description": ""
 }

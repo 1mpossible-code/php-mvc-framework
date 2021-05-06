@@ -4,10 +4,10 @@
 namespace app\controllers;
 
 
-use app\core\Application;
-use app\core\Controller;
-use app\core\Request;
-use app\core\Response;
+use impossible\phpmvc\Application;
+use impossible\phpmvc\Controller;
+use impossible\phpmvc\Request;
+use impossible\phpmvc\Response;
 use app\models\ContactForm;
 
 /**
@@ -31,8 +31,8 @@ class ContactController extends Controller
     /**
      * Handle the data from
      * contact's page request
-     * @param \app\core\Request $request
-     * @param \app\core\Response $response
+     * @param \impossible\phpmvc\Request $request
+     * @param \impossible\phpmvc\Response $response
      * @return string
      */
     public function store(Request $request, Response $response): string

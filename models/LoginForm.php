@@ -4,8 +4,8 @@
 namespace app\models;
 
 
-use app\core\Application;
-use app\core\Model;
+use impossible\phpmvc\Application;
+use impossible\phpmvc\Model;
 
 /**
  * Class LoginForm

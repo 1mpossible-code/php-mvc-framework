@@ -4,8 +4,8 @@
 namespace app\controllers;
 
 
-use app\core\Controller;
-use app\core\middlewares\AuthMiddleware;
+use impossible\phpmvc\Controller;
+use impossible\phpmvc\middlewares\AuthMiddleware;
 
 /**
  * Class ProfileController

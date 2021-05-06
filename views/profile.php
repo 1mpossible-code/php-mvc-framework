@@ -1,7 +1,7 @@
 <?php
 /** @var View $this */
 
-use app\core\View;
+use impossible\phpmvc\View;
 
 $this->title = 'Profile';
 ?>

@@ -1,8 +1,8 @@
 <?php
 /** @var View $this */
 
-use app\core\Application;
-use app\core\View;
+use impossible\phpmvc\Application;
+use impossible\phpmvc\View;
 
 ?>
 <!doctype html>

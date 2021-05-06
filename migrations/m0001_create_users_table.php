@@ -1,7 +1,7 @@
 <?php
 
-use app\core\Application;
-use app\core\MigrationInterface;
+use impossible\phpmvc\Application;
+use impossible\phpmvc\MigrationInterface;
 
 
 /**

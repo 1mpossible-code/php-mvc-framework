@@ -1,6 +1,6 @@
 <?php
 
-use app\core\Application;
+use impossible\phpmvc\Application;
 use app\models\User;
 
 // Composer autoload
