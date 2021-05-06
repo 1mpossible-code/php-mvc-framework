@@ -41,6 +41,10 @@ class Application
      */
     public Controller $controller;
     /**
+     * @var View
+     */
+    public View $view;
+    /**
      * Default layout
      * @var string
      */
@@ -79,6 +83,7 @@ class Application
         $this->response = new Response();
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
+        $this->view = new View();
 
         // Create database connection
         $this->db = new Database($config['db']);
@@ -99,7 +104,7 @@ class Application
             // Set exception status code
             $this->response->setStatusCode($exception->getCode());
             // Render _error view with exception
-            echo $this->router->renderView('_error', [
+            echo Application::$app->view->renderView('_error', [
                 'exception' => $exception,
             ]);
         }
