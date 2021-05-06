@@ -1,6 +1,8 @@
 <?php
+/** @var View $this */
 
 use app\core\Application;
+use app\core\View;
 
 ?>
 <!doctype html>
@@ -9,7 +11,7 @@ use app\core\Application;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Hello, world!</title>
+    <title><?php echo $this->title ?></title>
 </head>
 <body>
 <!-- Navbar-->
@@ -34,13 +36,13 @@ use app\core\Application;
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <?php if (Application::isGuest()): ?>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/login">Login</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/login">Login</a>
+                    </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
                 <?php else: ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile">Profile</a>

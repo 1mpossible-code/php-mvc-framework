@@ -1,11 +1,18 @@
 <?php
-/** @var $model User */
+/**
+ * @var $model User
+ * @var $this View
+ */
 
 use app\core\form\elements\InputEmail;
 use app\core\form\elements\InputPassword;
 use app\core\form\elements\InputText;
 use app\core\form\Form;
-use app\models\User; ?>
+use app\core\View;
+use app\models\User;
+
+$this->title = 'Register';
+?>
 
     <h1>Register</h1>
 <?php $form = new Form('', 'POST'); ?>
