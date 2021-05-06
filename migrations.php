@@ -1,6 +1,7 @@
 <?php
 
 use app\core\Application;
+use app\models\User;
 
 // Composer autoload
 require_once __DIR__ . '/vendor/autoload.php';
@@ -10,8 +11,9 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // Create config with information
-// from .env
+// from .env and userClass value
 $config = [
+    'userClass' => User::class,
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
