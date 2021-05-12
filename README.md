@@ -1,13 +1,16 @@
 # PHP MVC framework
+
 ![](https://img.shields.io/github/v/release/1mpossible-code/php-mvc-core)
 ![](https://img.shields.io/github/license/1mpossible-code/php-mvc-framework?color=green)
 
 Minimalistic custom framework created for educational purposes.
 
+* [Description](#description)
 * [Installation](#installation)
     * [Existing build](#existing-build)
     * [Only core](#only-core)
 * [Usage](#usage)
+* [Documentation](#documentation)
 * [Contributing](#contributing)
 * [Credits](#credits)
 * [License](#license)
@@ -48,6 +51,10 @@ composer require impossible/php-mvc-core
 1. Open in browser http://localhost/
 
 > You can use default .env file to run build
+
+## Documentation
+
+You can find documentation with [the link](https://github.com/1mpossible-code/php-mvc-core/blob/master/docs/index.md)
 
 ## Contributing
 
