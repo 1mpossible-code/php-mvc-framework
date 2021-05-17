@@ -48,6 +48,8 @@ composer require impossible/php-mvc-core
 1. Create `.env` file from `.env.example` file
 1. Run `composer install`
 1. Run `docker-compose up`
+1. Run `docker ps` and find CONTAINER ID of apache container
+1. Run `docker exec -ti CONTAINER ID sh -c "php app/migrations.php up"`
 1. Open in browser http://localhost/
 
 > You can use default .env file to run build

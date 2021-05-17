@@ -13,6 +13,7 @@ $dotenv->load();
 // Create config with information
 // from .env
 $config = [
+    'userClass' => User::class,
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
