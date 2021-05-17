@@ -23,5 +23,21 @@ $config = [
 // Create an instance of application
 $app = new Application(__DIR__, $config);
 
-// Apply migrations
-$app->db->applyMigrations();
+// Process up, down and fresh arguments
+// else display help
+if ($argv[1] === 'up') {
+    $app->db->applyMigrations();
+} else if ($argv[1] === 'down') {
+    $app->db->destroyMigrations();
+} else if ($argv[1] === 'fresh') {
+    $app->db->freshMigrations();
+} else {
+    echo "PHP MVC Framework".PHP_EOL.PHP_EOL;
+    echo "MIGRATIONS".PHP_EOL.PHP_EOL;
+    echo "Usage:".PHP_EOL;
+    echo "  command [arguments]".PHP_EOL.PHP_EOL;
+    echo "Available commands:".PHP_EOL;
+    echo "  up\t\t Apply migrations".PHP_EOL;
+    echo "  down\t\t Destroy migrations".PHP_EOL;
+    echo "  fresh\t\t Make fresh migrations".PHP_EOL;
+}

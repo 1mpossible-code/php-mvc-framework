@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa5f8cb6fd19700f8ca3dd8b2e7c305a",
+    "content-hash": "12bcdd80a3d7a1611a808613193810d5",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -74,16 +74,16 @@
         },
         {
             "name": "impossible/php-mvc-core",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/1mpossible-code/php-mvc-core.git",
-                "reference": "f94feff450096370137bcda5506b88baa3feadef"
+                "reference": "0b5d4aba9eccc1cb5e53facadb9c89a99f1e51f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1mpossible-code/php-mvc-core/zipball/f94feff450096370137bcda5506b88baa3feadef",
-                "reference": "f94feff450096370137bcda5506b88baa3feadef",
+                "url": "https://api.github.com/repos/1mpossible-code/php-mvc-core/zipball/0b5d4aba9eccc1cb5e53facadb9c89a99f1e51f9",
+                "reference": "0b5d4aba9eccc1cb5e53facadb9c89a99f1e51f9",
                 "shasum": ""
             },
             "type": "library",
@@ -102,9 +102,9 @@
             "description": "Core of the php-mvc-framework",
             "support": {
                 "issues": "https://github.com/1mpossible-code/php-mvc-core/issues",
-                "source": "https://github.com/1mpossible-code/php-mvc-core/tree/v1.0.1"
+                "source": "https://github.com/1mpossible-code/php-mvc-core/tree/v1.0.2"
             },
-            "time": "2021-05-06T16:46:24+00:00"
+            "time": "2021-05-17T18:23:27+00:00"
         },
         {
             "name": "phpoption/phpoption",
