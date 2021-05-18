@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\services\LoginService;
 use impossible\phpmvc\Application;
 use impossible\phpmvc\Controller;
 use impossible\phpmvc\Request;
@@ -16,6 +17,19 @@ use app\models\LoginForm;
  */
 class LoginController extends Controller
 {
+    /**
+     * @var LoginService
+     */
+    private LoginService $loginService;
+
+    /**
+     * LoginController constructor.
+     */
+    public function __construct()
+    {
+        $this->loginService = new LoginService();
+    }
+
     /**
      * Show login page
      * @return array|false|string|string[]
@@ -42,14 +56,10 @@ class LoginController extends Controller
     {
         // Make new login form
         $loginForm = new LoginForm();
-        // Load data to login form model
-        $loginForm->loadData($request->getBody());
-        // If login form data is valid and user
-        // logined successfully redirect to homepage
-        if ($loginForm->validate() && $loginForm->login()) {
+        // If login is successful, redirect to homepage
+        if ($this->loginService->login($loginForm, $request)) {
             // Redirect to homepage
             $response->redirect('/');
-            exit;
         }
         // Set auth layout
         $this->setLayout('auth');
@@ -62,10 +72,10 @@ class LoginController extends Controller
     /**
      * Logout user
      */
-    public function destroy(Request $request, Response $response)
+    public function destroy(Request $request, Response $response): void
     {
         // Logout user
-        Application::$app->logout();
+        $this->loginService->logout();
         // Redirect guest to homepage
         $response->redirect('/');
         // Stop application
