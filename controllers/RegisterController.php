@@ -4,12 +4,11 @@
 namespace app\controllers;
 
 
+use app\services\RegisterService;
 use impossible\phpmvc\Application;
 use impossible\phpmvc\Controller;
 use impossible\phpmvc\Request;
-use impossible\phpmvc\Response;
 use app\models\User;
-use function Couchbase\defaultDecoder;
 
 /**
  * Class RegisterController
@@ -17,6 +16,19 @@ use function Couchbase\defaultDecoder;
  */
 class RegisterController extends Controller
 {
+    /**
+     * @var RegisterService
+     */
+    private RegisterService $registerService;
+
+    /**
+     * RegisterController constructor.
+     */
+    public function __construct()
+    {
+        $this->registerService = new RegisterService();
+    }
+
     /**
      * Show register page
      * @return array|false|string|string[]
@@ -39,15 +51,12 @@ class RegisterController extends Controller
     {
         // Create an instance of RegisterModel
         $user = new User();
-        // Fulfill the model with the data from request
-        $user->loadData($request->getBody());
-        // Set success flash message if the validation is passed and new user is created
-        if ($user->validate() && $user->save()) {
+        // Set success flash message if new user is registered successfully
+        if ($this->registerService->register($user, $request)) {
             // Set success flash message
             Application::$app->session->setFlash('success', 'User created successfully!');
             // Redirect to homepage
             Application::$app->response->redirect('/');
-            exit;
         }
         // Render register page
         $this->setLayout('auth');
