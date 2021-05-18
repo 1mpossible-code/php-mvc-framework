@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\services\ContactService;
 use impossible\phpmvc\Application;
 use impossible\phpmvc\Controller;
 use impossible\phpmvc\Request;
@@ -16,6 +17,20 @@ use app\models\ContactForm;
  */
 class ContactController extends Controller
 {
+    /**
+     * @var ContactService
+     */
+    private ContactService $contactService;
+
+    /**
+     * ContactController constructor.
+     */
+    public function __construct()
+    {
+        // Contact service
+        $this->contactService = new ContactService();
+    }
+
     /**
      * Show contact page
      * @return array|false|string|string[]
@@ -31,19 +46,17 @@ class ContactController extends Controller
     /**
      * Handle the data from
      * contact's page request
-     * @param \impossible\phpmvc\Request $request
-     * @param \impossible\phpmvc\Response $response
+     * @param Request $request
+     * @param Response $response
      * @return string
      */
     public function store(Request $request, Response $response): string
     {
         // Create an instance of contact form
         $contactForm = new ContactForm();
-        // Load data to model
-        $contactForm->loadData($request->getBody());
-        // If sending is successful make success flash
+        // If saving is successful make success flash
         // message and redirect ot this page
-        if ($contactForm->validate() && $contactForm->save()) {
+        if ($this->contactService->save($contactForm, $request)) {
             // Success flash message
             Application::$app->session->setFlash('success', 'Thanks for contacting us!');
             // Redirect back
