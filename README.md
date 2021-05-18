@@ -20,7 +20,7 @@ Minimalistic custom framework created for educational purposes.
 ## Description
 
 It is a framework on base of
-[core](https://github.com/1mpossible-code/php-mvc-core)
+[core](https://github.com/1mpossible-code/php-mvc-core#php-mvc-core)
 that was created for educational purposes
 
 It contains some example code to show the abilities of framework
@@ -37,7 +37,7 @@ git clone https://github.com/1mpossible-code/php-mvc-framework.git
 
 ### Only core
 
-* Use composer to require [core](https://github.com/1mpossible-code/php-mvc-core)
+* Use composer to require [core](https://github.com/1mpossible-code/php-mvc-core#installation)
 
 ```shell
 composer require impossible/php-mvc-core
