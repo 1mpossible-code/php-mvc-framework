@@ -50,7 +50,7 @@ class LoginForm extends Model
             // Return false if user email is invalid
             return false;
         }
-        if (password_verify($this->password, $user->password)) {
+        if (!password_verify($this->password, $user->password)) {
             // Add error to field password
             $this->addError('password', 'Password is not valid. Try again');
             // Return false if user password is invalid
