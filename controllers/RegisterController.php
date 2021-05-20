@@ -26,6 +26,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        // Create an instance of RegisterService
         $this->registerService = new RegisterService();
     }
 
@@ -35,10 +36,13 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        $registerModel = new User();
+        // Create an instance of User model
+        $user = new User();
+        // Set auth layout
         $this->setLayout('auth');
+        // Render register view page with user model
         return $this->render('auth/register', [
-            'model' => $registerModel,
+            'model' => $user,
         ]);
     }
 
@@ -49,7 +53,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // Create an instance of RegisterModel
+        // Create an instance of User model
         $user = new User();
         // Set success flash message if new user is registered successfully
         if ($this->registerService->register($user, $request)) {

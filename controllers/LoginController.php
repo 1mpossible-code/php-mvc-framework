@@ -78,7 +78,5 @@ class LoginController extends Controller
         $this->loginService->logout();
         // Redirect guest to homepage
         $response->redirect('/');
-        // Stop application
-        exit;
     }
 }
