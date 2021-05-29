@@ -14,7 +14,7 @@
     "require": {
         "vlucas/phpdotenv": "^5.3",
         "ext-pdo": "*",
-        "impossible/php-mvc-core": "v1.0.2"
+        "impossible/php-mvc-core": "dev-master"
     }
     ,
     "require-dev": {
